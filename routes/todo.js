@@ -3,14 +3,8 @@ import express from "express";
 import morgan from "morgan";
 
 
-
-
-
-
 export default function setupTodoRouter(db) {
   const router = express.Router();
-
-
 
 
   //Create our GET route that just sends back the Todos data

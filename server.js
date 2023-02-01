@@ -5,12 +5,9 @@ import { nanoid } from "nanoid";
 import setupToDoRouter from "./routes/todo.js";
 import morgan from "morgan";
 
+ // // Configure lowdb to write to JSONFile. This will be our "database"
 
-
-(async function () {
-
- 
-  // Configure lowdb to write to JSONFile. This will be our "database"
+export default async function createServer(){
   const adapter = new JSONFile("db.json");
   const db = new Low(adapter);
 
@@ -39,11 +36,15 @@ import morgan from "morgan";
     }
   })
 
-  app.use(morgan('tiny'),"/todo",setupToDoRouter(db));
+  app.use("/todo",morgan('tiny'),setupToDoRouter(db));
 
-  //Have the app listen on port 8080
-  app.listen(8080, function () {
-    //After the app is running, run this console.log
-    console.log("App running on http://localhost:8080");
-  });
-})();
+  return app;
+};
+
+
+//   //Have the app listen on port 8080
+//   app.listen(8080, function () {
+//     //After the app is running, run this console.log
+//     console.log("App running on http://localhost:8080");
+//   });
+// })();
