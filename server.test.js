@@ -13,6 +13,43 @@ describe("Just testing the server", function(){
                     done();
                 }
             })
+        });
+        it("should be able to create a new todo", function (done){
+            request(server).post("/todo?admin=true").send({
+                todo: "clean the garage"
+            }).set("Accept", "application/json").expect(200).end(function(err,response){
+                if(err){
+                    throw err;
+                } else{
+                    console.log(response);
+                    expect(response.body).toEqual({success:true});
+                    done();
+                }
+            })
         })
     })
 });
+
+// describe("testing the /todo route", () => {
+//     it("/todo should get back a 200", (done) => {
+//         request(server).get("/data").expect(200).end((err) => {
+//             if(err){
+//                 throw err;
+//             } else {
+//                 done();
+//             }
+//         })
+//     });
+
+//     it("/data should display my name", (done) => {
+//         request(server).get("/data").expect(200).end((err, response) => {
+//             if(err){
+//                 throw err;
+//             } else {
+//                 console.log(response.body.data.name);
+//                 expect(response.body.data.name).toBe("grace")
+//                 done();
+//             }
+//         })
+//     })
+// })
