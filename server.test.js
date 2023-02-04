@@ -26,9 +26,38 @@ describe("Just testing the server", function(){
                     done();
                 }
             })
+        });
+        it("should be able to delete a todo", function(done){
+            request(server).del("/todo?admin=true").set("Accept", "application/json").expect(200).end(function(err){
+                if(err){
+                    throw err;
+                }else {
+                    done();
+                }
+            })
+        });
+        it("should be able to update a todo", function(done){
+            request(server).put("/todo?admin=true").send({"todo": "todo was changed"}).set("Accept", "application/json").expect(200).end(function(err){
+                if(err){
+                    throw err;
+                }else {
+                    done();
+                }
+            })
+        });
+        it("should be able to get a todo", function(done){
+            request(server).get("/todo?admin=true").expect(200).end(function(err){
+                if(err){
+                    throw err;
+                }else{
+                    done();
+                }
+            })
         })
     })
 });
+
+
 
 // describe("testing the /todo route", () => {
 //     it("/todo should get back a 200", (done) => {
